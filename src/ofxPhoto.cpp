@@ -17,7 +17,7 @@ void ofxPhoto::init () {
     captureWidth = 0;
     captureHeight = 0;
 
-    ofLogNotice() << "Camera init.  Takes about 10 seconds.\n";
+    ofLogNotice() << "Camera init.  Takes about 10 seconds.";
 
 	cameracontext = gp_context_new();
 
@@ -31,18 +31,18 @@ void ofxPhoto::init () {
 
 	retval = gp_camera_init(camera, cameracontext);
 	if (retval != GP_OK) {
-        ofLogError() << "Retval: %d %s\n" << retval << gp_result_as_string(retval);
+        ofLogError() << "Retval: " << retval << gp_result_as_string(retval);
 	}
 	else {
-        ofLogNotice() << "Initializing finished!\n";
+        ofLogNotice() << "Initializing finished!";
         bCameraInit = true;
 	}
 }
 
 void ofxPhoto::exit() {
-    ofLogNotice() << "Camera closing...\n";
+    ofLogNotice() << "Camera closing...";
     gp_camera_exit(camera, cameracontext);
-    ofLogNotice() << "Finished!\n";
+    ofLogNotice() << "Finished!";
 }
 
 void ofxPhoto::threadedFunction(){
@@ -87,7 +87,7 @@ bool ofxPhoto::captureSucceeded(){
 bool ofxPhoto::capture_to_of(Camera *camera, GPContext *cameracontext) {
 
     if(bCameraInit) {
-        ofLogNotice() << "Capturing (this may take some time) ...\n";
+        ofLogNotice() << "Capturing (this may take some time) ...";
 
         //force camera to take a picture
         retval = gp_camera_capture(camera, GP_CAPTURE_IMAGE, &camera_file_path, cameracontext);
@@ -110,16 +110,16 @@ bool ofxPhoto::capture_to_of(Camera *camera, GPContext *cameracontext) {
 
                 putBmpIntoPixels(bmp, pix);
 
-                ofLogNotice() << "Deleting picture on camera...\n";
+                ofLogNotice() << "Deleting picture on camera...";
 
                 retval = gp_camera_file_delete(camera, camera_file_path.folder, camera_file_path.name,cameracontext);
                 if(retval != GP_OK) {
-                    ofLogError() << "Cannot delete picture on camera.\n";
-                    ofLogNotice() << "Retval: %d %s\n" << retval << gp_result_as_string(retval);
+                    ofLogError() << "Cannot delete picture on camera.";
+                    ofLogError() << "Retval: " << retval << gp_result_as_string(retval);
                 }
 
                 gp_file_free(camerafile);
-                ofLogNotice() << "Capturing finished!\n";
+                ofLogNotice() << "Capturing finished!";
 
                 //Camera is not busy anymore
                 bCamIsBusy = false;
@@ -128,7 +128,7 @@ bool ofxPhoto::capture_to_of(Camera *camera, GPContext *cameracontext) {
                 return bCaptureSucceeded;
             }
             else {
-                ofLogNotice() << "Retval: %d %s\n" << retval << gp_result_as_string(retval);
+                ofLogNotice() << "Retval: " << retval << gp_result_as_string(retval);
 
                 //Camera is not busy anymore
                 bCamIsBusy = false;
@@ -137,7 +137,7 @@ bool ofxPhoto::capture_to_of(Camera *camera, GPContext *cameracontext) {
             }
         }
         else {
-            ofLogNotice() << "Retval: %d %s\n" << retval << gp_result_as_string(retval);
+            ofLogNotice() << "Retval: " << retval << gp_result_as_string(retval);
 
             //Camera is not busy anymore
             bCamIsBusy = false;
@@ -146,7 +146,7 @@ bool ofxPhoto::capture_to_of(Camera *camera, GPContext *cameracontext) {
         }
     }
     else {
-        ofLogError() << "Camera is not initiated\n";
+        ofLogError() << "Camera is not initiated";
 
         //Camera is not busy anymore
         bCamIsBusy = false;
