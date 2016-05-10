@@ -109,6 +109,10 @@ bool ofxPhoto::capture_to_of(Camera *camera, GPContext *cameracontext) {
                 bmp = FreeImage_LoadFromMemory(fif, hmem, 0);
 
                 putBmpIntoPixels(bmp, pix);
+                
+                // Added via DevKid's sugggeson https://forum.openframeworks.cc/t/ofxphoto-libgphoto2/3474/11
+                FreeImage_CloseMemory(hmem);
+                FreeImage_Unload(bmp);
 
                 ofLogNotice() << "Deleting picture on camera...";
 
